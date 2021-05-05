@@ -1,72 +1,89 @@
-
 #  TODO LIST:
-1 - Implement Mark editing style
-    - [x] set mark
-    - [x] mark/cursor swap
-    - [x] copy
-    - [x] delete
-    - [X] cut
-    - [x] paste
-
-2 - searching
-    - [ ] reverse searching
-    - [ ] iterative searching
-
-3 - [x] line deleting (backspace)
-
-4 - [ ] log system
-
-5 - [ ] cursor clipping when drawing
-
-6 - [ ] change cursor and mark to be for the current file only
-
-7 - FILE MANAGEMENT [INTERATIVE]
-    - [ ] open file 
-    - [ ] new file
-    - [ ] close file
-    - [ ] switch file 
-    - [ ] save file
-
-8 - text scrolling
-    - [x] vertical scrolling
-    - [x] horizontal scrolling
-
-9 - text drawing 
-    - [x] redraw only the screen range of text
-
-9 - GUI
-    - [x] line highlighting
-    - [ ] cursor blinking
-    - [ ] text file info footer
-          - [x] filename
-          - [x] cursor position
-          - [ ] line ending type
-          - [ ] dirty file indicator
-
-10 - basic text editing and cursor movement
-     - [x] delete a word                      
-     - [x] move cursor between spaces vertically
-     - [x] move cursor to the next blank line
-     - [x] home and end cursor movement
-     - [x] begin of file and end of file cursor movement
-     - [x] line swapping
-     - [ ] undo
-     - [ ] redo
-     - [ ] tab autocomplete
-
-11 - [ ] syntax highlighting
-
-12 - [ ] editor auto execute build file and display output
-
-13 - [ ] editor parse the compiler output line error and jump on command
-
-14 - [ ] goto line
-
-15 - [x] 60 fps
-
-16 - [ ] when the program is inactive or minimized, we just sleep and dont do  anything
-
-17 - [ ] Editor parser and lexer
-         - [ ] Line indentation and virtual whitespacing
-         - [ ] Save Function definitions lines
-         - [ ] Save definitions for autocompletion
+<ul>
+    <li> Implement Mark editing style
+    <ul>
+        <li> [x] set mark </li>
+        <li> [x] mark/cursor swap </li>
+        <li> [x] copy </li>
+        <li> [x] paste </li>
+        <li> [x] delete</li>
+        <li> [X] cut </li>
+    </ul>
+    </li>
+    <li> Searching
+    <ul>
+        <li> [ ]Basic searching
+        <li> [x] reverse searchng </li>
+        <li> [x] iterative searching </li>
+    </ul>
+    </li>
+     <li> File Management
+     <ul>
+        <li> [ ] Open file </li>
+        <li> [ ] Close File </li>
+        <li> [ ] New file </li>
+        <li> [ ] Switch files </li>
+        <li> [ ] Save file </li>
+     </ul>
+    </li>
+     <li>log system 
+     <ul>
+         <li> [ ] Basic log system</li>
+     </ul>
+     </li>
+      <li>Rendering
+     <ul>
+         <li> [ ] Cursor Clipping</li>
+     </ul>
+     </li>
+    </li>
+      <li> Text Scrolling
+     <ul>
+        <li> [x] Basic vertical scrolling </li>
+         <li> [x] Basic horizontal scrolling </li>
+         <li> [x] Vertical smooth scrolling </li>
+         <li> [ ] Horizontal smooth scrolling </li>
+     </ul>
+     </li>
+      <li> GUI
+     <ul>
+        <li> [x] Line highlighting</li>
+         <li> [x] Cursor blinking </li>
+         <li> [x] File info footer
+           <ul>
+              <li> [x] Filename </li>
+              <li> [x] Cursor Position </li>
+              <li> [x] Vertical smooth scrolling </li>
+              <li> [ ] Line ending type </li>
+              <li> [ ] Dirty file indicator </li>
+           </ul>
+         </li>
+     </li>
+     </ul>
+     </li>
+     <li> Basic text editing
+     <ul>
+     <li>[x] line deleting </li>
+     <li>[x] delete a word </li>
+     <li>[x] move cursor between spaces vertically </li>
+     <li>[x] move cursor to the next blank line </li>
+     <li>[x] home and end cursor movement </li>
+     <li>[x] begin of file and end of file cursor movement </li>
+     <li>[x] line swapping </li>
+     <li>[x] undo </li>
+     <li>[x] tab autocomplete </li>
+     </ul>
+     </li>
+<li>[ ] syntax highlighting</li>
+<li>[ ] editor auto execute build file and display output</li>
+<li>[ ] editor parse the compiler output line error and jump on command</li>
+<li>[ ] Enforced framerate</li>
+<li>[ ] when the program is inactive or minimized, we just sleep and dont do  anything</li>
+<li> Editor parser and lexer
+<ul>
+<li>[ ] Line indentation and virtual whitespacing</li>
+<li>[ ] Save Function definitions lines</li>
+<li>[ ] Save definitions for autocompletion</li>
+</ul>
+</li>
+</ul>
