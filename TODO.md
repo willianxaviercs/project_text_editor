@@ -13,8 +13,8 @@
     <li> Searching
     <ul>
         <li> [ ]Basic searching
-        <li> [x] reverse searchng </li>
-        <li> [x] iterative searching </li>
+        <li> [ ] reverse searchng </li>
+        <li> [ ] iterative searching </li>
     </ul>
     </li>
      <li> File Management
@@ -48,7 +48,7 @@
       <li> GUI
      <ul>
         <li> [x] Line highlighting</li>
-         <li> [x] Cursor blinking </li>
+         <li> [ ] Cursor blinking </li>
          <li> [x] File info footer
            <ul>
               <li> [x] Filename </li>
@@ -70,8 +70,8 @@
      <li>[x] home and end cursor movement </li>
      <li>[x] begin of file and end of file cursor movement </li>
      <li>[x] line swapping </li>
-     <li>[x] undo </li>
-     <li>[x] tab autocomplete </li>
+     <li>[ ] undo </li>
+     <li>[ ] tab autocomplete </li>
      </ul>
      </li>
 <li>[ ] syntax highlighting</li>
