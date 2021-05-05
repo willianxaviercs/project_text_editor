@@ -12,7 +12,7 @@
     </li>
     <li> Searching
     <ul>
-        <li> [ ]Basic searching
+        <li> [ ] Basic searching
         <li> [ ] reverse searchng </li>
         <li> [ ] iterative searching </li>
     </ul>
