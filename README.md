@@ -9,3 +9,5 @@ smooth text scrolling.
 
 The project is mainly written in C with a few features of C++, like default
 arguments, but the are no classes, templates and the std library.
+
+Creditds to [Sean Barret](https://github.com/nothings) for the stb_truetype.h font load library.
