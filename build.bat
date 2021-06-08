@@ -2,9 +2,9 @@
 
 set WARNINGS= /wd4505 /wd4100 /wd4189 /wd4201 
 
-set COMPILER_FLAGS= -nologo -Gm -Oi -Zi -FC -W4 -WX %WARNINGS%
+set COMPILER_FLAGS= -nologo -EHa -Gm -Od -Zi -FC -W4 -WX %WARNINGS%
 
-set WIN32_LIBS=  user32.lib gdi32.lib opengl32.lib
+set WIN32_LIBS=  user32.lib gdi32.lib opengl32.lib	
 
 set LINKER_FLAGS= -incremental:no -nologo  -debug
 

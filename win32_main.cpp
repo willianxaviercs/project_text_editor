@@ -1,8 +1,11 @@
 #include <windows.h>
 #include <stdint.h>
+
+#if 1
 #include <memory.h>
 #include <malloc.h>
 #include <stdlib.h>
+#endif
 
 #include <GL/gl.h>
 
@@ -39,7 +42,7 @@ win32_memory_alloc(u32 size)
     
     //memory = VirtualAlloc(0, size, MEM_COMMIT|MEM_RESERVE, PAGE_READWRITE);
     
-    memory = calloc(size, 1);
+    memory = malloc(size);
     
     if (memory == NULL)
     {
@@ -54,7 +57,8 @@ win32_memory_free(void *memory)
 {
     if (memory)
     {
-        VirtualFree(memory, 0, MEM_RELEASE);
+        //VirtualFree(memory, 0, MEM_RELEASE);
+        free(memory);
     }
 }
 
@@ -198,6 +202,12 @@ DecodeKeyboardInput(keyboard_input *keyboard, WPARAM key, bool isDown, bool wasD
     
     switch(key)
     {
+        case VK_TAB:
+        {
+            keyboard->tab.endedDown = isDown;
+            keyboard->changedState = true;
+            break;
+        }
         // SYSTEM KEYS
         case VK_SPACE:
         {
@@ -602,8 +612,8 @@ Win32WindowUpdate(HDC hdc, RECT rect, win32_offscreen_buffer *buffer)
     glEnable(GL_TEXTURE_2D);
     
     // clear screen
-    glClearColor(1.0f, 0, 1.0f, 0);
-    glClear(GL_COLOR_BUFFER_BIT);
+    //glClearColor(1.0f, 0, 1.0f, 0);
+    //glClear(GL_COLOR_BUFFER_BIT);
     
     glMatrixMode(GL_TEXTURE);
     glLoadIdentity();
@@ -861,6 +871,7 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance,
     ed.screen_buffer.height = global_backbuffer.height;
     ed.screen_buffer.memory = global_backbuffer.memory;
     ed.screen_buffer.bytes_per_pixel = global_backbuffer.bytes_per_pixel;
+    ed.screen_buffer.pitch = ed.screen_buffer.bytes_per_pixel * ed.screen_buffer.width;
     
     // font initialization
     editor_font font = {};
@@ -879,7 +890,12 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance,
     char *test_file_path = "../code/test.c"; // .c file
     
     char *file_buffer = win32_open_file_into_buffer(test_file_path);
-    editor_text_buffer *text_buffer = editor_text_buffer_create(file_buffer, &ed);
+    ed.current_text_buffer = editor_text_buffer_create(file_buffer, &ed);
+    
+    ed.current_text_buffer->filename = zen_string_make("SCRATCH");
+    
+    editor_text_buffer_list_add_node(ed.current_text_buffer, &ed);
+    
     free(file_buffer);
     
     editor_rectangle window_rect;
@@ -891,15 +907,8 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance,
     // TODO(2): also research how we come up with the correct width
     // of a font
     
-    ed.text_range_x_start = 0;
-    ed.text_range_x_end = (rect.right - rect.left) / font.width;
-    ed.text_range_y_start = 0;
-    ed.text_range_y_end = ((rect.bottom - rect.top) / font.size ) - 2;
-    
-    ed.smooth_range_x_start = ed.text_range_x_start;
-    ed.smooth_range_x_end = ed.text_range_x_end;
-    ed.smooth_range_y_start = ed.text_range_y_start;
-    ed.smooth_range_y_end = ed.text_range_y_end;
+    ed.current_text_buffer->text_range_x_start = 0;
+    ed.current_text_buffer->text_range_y_start = 0;
     
     // TODO(willian): we probably we gonna have only one arena for the entire
     //                editor, but each individual text buffer will have their own undo and redo
@@ -937,14 +946,24 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance,
         GetClientRect(window_handle, &rect);
         
         // we alias the win32 buffer with the editor buffer so its platform independent
-        window_rect.x = rect.left + 2;
-        window_rect.y = rect.top + 2;
+        window_rect.x = rect.left;
+        window_rect.y = rect.top;
         window_rect.dx = rect.right;
         window_rect.dy = rect.bottom;
         ed.screen_buffer.width = global_backbuffer.width;
         ed.screen_buffer.height = global_backbuffer.height;
         ed.screen_buffer.memory = global_backbuffer.memory;
         ed.screen_buffer.bytes_per_pixel = global_backbuffer.bytes_per_pixel;
+        ed.screen_buffer.pitch = ed.screen_buffer.bytes_per_pixel * ed.screen_buffer.width;
+        
+        u32 x_range_in_glyphs = (rect.right - rect.left) / font.width;
+        u32 y_range_in_glyphs = ((rect.bottom - rect.top) / font.size ) - 1;
+        
+        ed.current_text_buffer->text_range_x_end = ed.current_text_buffer->text_range_x_start + 
+            x_range_in_glyphs;
+        
+        ed.current_text_buffer->text_range_y_end = ed.current_text_buffer->text_range_y_start +
+            y_range_in_glyphs;
         
         // copy editor clipboard to platform clipboard
         if (ed.copy_clipboard.has_changed)
@@ -961,7 +980,7 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance,
         }
         
         // update and render
-        editor_update_and_render(&ed.screen_buffer, &font, text_buffer, &keyboard, window_rect, &ed);
+        editor_update_and_render(&ed.screen_buffer, &font, ed.current_text_buffer, &keyboard, window_rect, &ed);
         
         // calc this frame time
         s64 new_frame_time = win32_get_ticks_elapsed();
@@ -972,11 +991,9 @@ WinMain(HINSTANCE instance, HINSTANCE prev_instance,
         if (seconds_elapsed < target_seconds_per_frame)
         {
             // truncation
-            DWORD sleep_milliseconds = (DWORD)(1000.0f * (target_seconds_per_frame - seconds_elapsed));
+            DWORD sleep_ms = (DWORD)(1000.0f * (target_seconds_per_frame - seconds_elapsed));
             
-            int x= 0;
-            
-            Sleep(sleep_milliseconds);
+            Sleep(sleep_ms);
         }
         
         // remember frame time
