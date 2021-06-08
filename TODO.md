@@ -12,18 +12,18 @@
     </li>
     <li> Searching
     <ul>
-        <li> [ ] Basic searching
-        <li> [ ] reverse searchng </li>
-        <li> [ ] iterative searching </li>
+        <li> [x] Basic searching
+        <li> [x] reverse searchng </li>
+        <li> [x] iterative searching </li>
     </ul>
     </li>
      <li> File Management
      <ul>
-        <li> [ ] Open file </li>
+        <li> [x] Open file </li>
         <li> [ ] Close File </li>
         <li> [ ] New file </li>
-        <li> [ ] Switch files </li>
-        <li> [ ] Save file </li>
+        <li> [x] Switch files </li>
+        <li> [x] Save file </li>
      </ul>
     </li>
      <li>log system 
@@ -33,7 +33,7 @@
      </li>
       <li>Rendering
      <ul>
-         <li> [ ] Cursor Clipping</li>
+         <li> [x] Cursor Clipping</li>
      </ul>
      </li>
     </li>
@@ -41,7 +41,7 @@
      <ul>
         <li> [x] Basic vertical scrolling </li>
          <li> [x] Basic horizontal scrolling </li>
-         <li> [x] Vertical smooth scrolling </li>
+         <li> [ ] Vertical smooth scrolling </li>
          <li> [ ] Horizontal smooth scrolling </li>
      </ul>
      </li>
@@ -70,20 +70,20 @@
      <li>[x] home and end cursor movement </li>
      <li>[x] begin of file and end of file cursor movement </li>
      <li>[x] line swapping </li>
-     <li>[ ] undo </li>
-     <li>[ ] tab autocomplete </li>
+     <li>[x] undo </li>
+     <li>[x] tab autocomplete </li>
      </ul>
      </li>
-<li>[ ] syntax highlighting</li>
+<li>[x] syntax highlighting</li>
 <li>[ ] editor auto execute build file and display output</li>
 <li>[ ] editor parse the compiler output line error and jump on command</li>
-<li>[ ] Enforced framerate</li>
+<li>[x] Enforced framerate</li>
 <li>[ ] when the program is inactive or minimized, we just sleep and dont do  anything</li>
 <li> Editor parser and lexer
 <ul>
 <li>[ ] Line indentation and virtual whitespacing</li>
 <li>[ ] Save Function definitions lines</li>
-<li>[ ] Save definitions for autocompletion</li>
+<li>[x] Save identifiers tokens for autocompletion</li>
 </ul>
 </li>
 </ul>
